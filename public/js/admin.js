@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminToken = localStorage.getItem('adminToken');
     if (!adminToken) { window.location.href = '/admin-login'; return; }
 
-    const API_URL = 'http://localhost:5000/api/admin';
+    const API_URL = '/api/admin';
     const usersContainer = document.getElementById('usersContainer');
     const adminMainDisplay = document.getElementById('adminMainDisplay');
     
