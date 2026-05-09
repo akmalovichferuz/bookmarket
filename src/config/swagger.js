@@ -13,6 +13,10 @@ const options = {
         },
         servers: [
             {
+                url: '/', // YANGLIK: Qaysi domenda ochilsa, o'shani avtomat oladi!
+                description: 'Joriy server (Railway)',
+            },
+            {
                 url: 'http://localhost:5000',
                 description: 'Lokal server',
             },
