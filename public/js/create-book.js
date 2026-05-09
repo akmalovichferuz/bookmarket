@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const API_URL = 'http://localhost:5000/api';
+    // YANGLANGAN QISM: Domen nomisiz, to'g'ridan-to'g'ri /api ga ulanadi.
+    // Bu kod kompyuterda ham, Railway'da ham avtomat o'z yo'lini topadi!
+    const API_URL = '/api';
     
     // HTML Elementlar
     const createBookForm = document.getElementById('createBookForm');
@@ -83,10 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append('title', document.getElementById('bookTitle').value.trim());
         formData.append('author', document.getElementById('bookAuthor').value.trim());
-        
-        // YANGLANGAN QISM: Narx (price) qo'shildi
         formData.append('price', document.getElementById('bookPrice').value); 
-        
         formData.append('genre', document.getElementById('bookGenre').value);
         formData.append('paperType', document.getElementById('bookPaperType').value);
         formData.append('pages', document.getElementById('bookPages').value);
