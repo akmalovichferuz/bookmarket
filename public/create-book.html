@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yangi e'lon qo'shish - BookMarket</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkBg font-sans text-lightText min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="bg-darkCard shadow-sm border-b border-darkBorder sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 text-primary cursor-pointer" onclick="window.location.href='/'">
+                <i class="fa-solid fa-arrow-left text-xl text-grayText hover:text-primary transition-colors mr-2"></i>
+                <i class="fa-solid fa-book-open-reader text-2xl"></i>
+                <h1 class="text-xl font-black tracking-tight">BookMarket</h1>
+            </div>
+            <div class="text-sm font-bold text-primary bg-primary/10 px-5 py-2 rounded-full border border-primary/20">
+                Yangi e'lon qo'shish
+            </div>
+        </div>
+    </header>
+
+    <!-- Asosiy Forma Qismi -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-darkCard rounded-2xl shadow-xl border border-darkBorder p-6 sm:p-10">
+            <h2 class="text-2xl md:text-3xl font-black mb-8 text-lightText border-b border-darkBorder pb-4"><i class="fa-solid fa-file-circle-plus text-primary mr-3"></i> Kitob ma'lumotlarini kiriting</h2>
+            
+            <form id="createBookForm" class="flex flex-col gap-8">
+                
+                <!-- Kitob nomi, Muallif va Narx -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-grayText mb-2">Kitob nomi <span class="text-red-500">*</span></label>
+                        <input type="text" id="bookTitle" required placeholder="Masalan: Yulduzli tunlar" 
+                            class="bg-darkBg border border-darkBorder text-lightText text-sm rounded-xl focus:ring-primary focus:border-primary block w-full p-4 outline-none transition-colors shadow-inner">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-grayText mb-2">Yozuvchi (Muallif) <span class="text-red-500">*</span></label>
+                        <input type="text" id="bookAuthor" required placeholder="Masalan: Pirimqul Qodirov" 
+                            class="bg-darkBg border border-darkBorder text-lightText text-sm rounded-xl focus:ring-primary focus:border-primary block w-full p-4 outline-none transition-colors shadow-inner">
+                    </div>
+                    <!-- YANGLANGAN QISM: NARX -->
+                    <div>
+                        <label class="block text-sm font-bold text-grayText mb-2">Narxi (So'm) <span class="text-red-500">*</span></label>
+                        <input type="number" id="bookPrice" required min="0" placeholder="Masalan: 45000" 
+                            class="bg-darkBg border border-darkBorder text-lightText text-sm rounded-xl focus:ring-primary focus:border-primary block w-full p-4 outline-none transition-colors shadow-inner">
+                    </div>
+                </div>
+
+                <!-- Janr va Qog'oz turi -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-grayText mb-2">Janr <span class="text-red-500">*</span></label>
+                        <select id="bookGenre" required class="bg-darkBg border border-darkBorder text-lightText text-sm rounded-xl focus:ring-primary focus:border-primary block w-full p-4 outline-none cursor-pointer shadow-inner">
+                            <option value="" class="text-gray-500">Janrni tanlang...</option>
+                            <option value="Badiiy adabiyot">Badiiy adabiyot</option>
+                            <option value="Tarixiy romanlar">Tarixiy romanlar</option>
+                            <option value="Biznes va motivatsiya">Biznes va motivatsiya</option>
+                            <option value="Ilmiy-ommabop">Ilmiy-ommabop</option>
+                            <option value="Diniy-ma'rifiy">Diniy-ma'rifiy</option>
+                            <option value="Bolalar adabiyoti">Bolalar adabiyoti</option>
+                            <option value="Detektiv va sarguzasht">Detektiv va sarguzasht</option>
+                            <option value="Darsliklar va qo'llanmalar">Darsliklar va qo'llanmalar</option>
+                            <option value="She'riyat">She'riyat</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-grayText mb-2">Qog'oz turi <span class="text-red-500">*</span></label>
+                        <select id="bookPaperType" required class="bg-darkBg border border-darkBorder text-lightText text-sm rounded-xl focus:ring-primary focus:border-primary block w-full p-4 outline-none cursor-pointer shadow-inner">
+                            <option value="" class="text-gray-500">Qog'oz turini tanlang...</option>
+                            <option value="Ofset qog'oz (Oq qog'oz)">Ofset qog'oz (Oq qog'oz)</option>
+                            <option value="Gazeta qog'ozi (Sarg'ish)">Gazeta qog'ozi (Sarg'ish)</option>
+                            <option value="Melyovanniy qog'oz (Yaltiroq/Silliq)">Melyovanniy qog'oz (Yaltiroq/Silliq)</option>
+                            <option value="Kraft qog'oz">Kraft qog'oz</option>
+                            <option value="Kitob-dizayner qog'ozi (Sariq/Fil suyagi rangi)">Kitob-dizayner qog'ozi (Sariq/Fil suyagi rangi)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Texnik o'lchamlar -->
+                <div class="bg-darkBg p-6 rounded-2xl border border-darkBorder">
+                    <h3 class="text-lg font-black mb-4 text-lightText"><i class="fa-solid fa-ruler-combined text-primary mr-2"></i> Texnik o'lchamlar</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-grayText mb-2">Sahifalar soni <span class="text-red-500">*</span></label>
+                            <input type="number" id="bookPages" required min="1" placeholder="Masalan: 450" 
+                                class="bg-darkCard border border-darkBorder text-lightText text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-3 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-grayText mb-2">Kitob eni (sm) <span class="text-red-500">*</span></label>
+                            <input type="number" id="bookWidth" required min="1" step="0.1" placeholder="14.5" 
+                                class="bg-darkCard border border-darkBorder text-lightText text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-3 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-grayText mb-2">Kitob bo'yi (sm) <span class="text-red-500">*</span></label>
+                            <input type="number" id="bookHeight" required min="1" step="0.1" placeholder="21.0" 
+                                class="bg-darkCard border border-darkBorder text-lightText text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-3 outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rasmlar yuklash qismi -->
+                <div>
+                    <h3 class="text-lg font-black mb-2 text-lightText"><i class="fa-regular fa-images text-primary mr-2"></i> Kitob rasmlari <span class="text-red-500">*</span></h3>
+                    <p class="text-xs text-grayText mb-4">Maksimal 5 ta rasm. Birinchi yuklangan rasm asosiy (muqova) rasm sifatida ko'rinadi.</p>
+                    
+                    <div class="flex items-center justify-center w-full">
+                        <label for="bookImages" class="flex flex-col items-center justify-center w-full h-48 border-2 border-primary border-dashed rounded-2xl cursor-pointer bg-primary/5 hover:bg-primary/10 transition-all shadow-inner">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <i class="fa-solid fa-cloud-arrow-up text-5xl text-primary mb-4 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]"></i>
+                                <p class="mb-2 text-md text-lightText font-bold">Rasmlarni tanlash uchun bosing</p>
+                                <p class="text-xs text-grayText">PNG, JPG, JPEG (Max: 5MB)</p>
+                            </div>
+                            <input id="bookImages" type="file" multiple accept="image/jpeg, image/png, image/webp" class="hidden" />
+                        </label>
+                    </div>
+                    
+                    <!-- Rasmlar preview chiqadigan joy -->
+                    <div id="imagePreview" class="flex flex-wrap gap-4 mt-6"></div>
+                </div>
+
+                <!-- Xatoliklar ekrani -->
+                <div id="errorMessage" class="text-red-400 text-sm hidden font-bold text-center bg-red-900/20 p-4 rounded-xl border border-red-500/30"></div>
+                
+                <!-- Yuborish tugmasi -->
+                <button type="submit" id="submitBtn" class="w-full bg-primary text-darkBg text-xl font-black rounded-xl px-5 py-5 mt-4 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:bg-primaryHover hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                    <i class="fa-solid fa-paper-plane"></i> E'lonni platformaga joylash
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    
+
+    <script src="./js/create-book.js"></script>
+</body>
+</html>

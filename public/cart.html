@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening Savatcham - BookMarket</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkBg font-sans text-lightText min-h-screen">
+
+    <header class="bg-darkCard p-5 flex justify-between items-center shadow-lg border-b border-darkBorder sticky top-0 z-50">
+        <h1 class="text-2xl font-black text-primary flex items-center gap-2">
+            <i class="fa-solid fa-book-open-reader"></i> BookMarket
+        </h1>
+        <div class="flex items-center gap-6">
+            <a href="/orders.html" class="text-emerald-400 font-bold hover:text-emerald-300 transition flex items-center gap-2 bg-emerald-500/10 px-4 py-2 rounded-lg border border-emerald-500/20">
+                <i class="fa-solid fa-box-open"></i> Buyurtmalarim
+            </a>
+            <a href="/" class="text-grayText font-bold hover:text-primary transition flex items-center gap-2">
+                <i class="fa-solid fa-arrow-left"></i> Asosiy sahifa
+            </a>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto p-6 mt-4">
+        <div class="flex items-center gap-3 mb-8">
+            <i class="fa-solid fa-cart-shopping text-3xl text-primary"></i>
+            <h2 class="text-3xl font-black text-lightText">Mening Savatcham</h2>
+        </div>
+        
+        <div id="cartItems" class="space-y-4">
+            <div class="text-center text-primary py-10">
+                <i class="fa-solid fa-spinner fa-spin text-4xl"></i>
+            </div>
+        </div>
+
+        <div class="mt-8 bg-darkCard p-6 rounded-3xl flex flex-col md:flex-row justify-between items-center shadow-[0_0_20px_rgba(0,0,0,0.2)] border border-darkBorder sticky bottom-6 z-40">
+            <div class="mb-4 md:mb-0 text-center md:text-left">
+                <p class="text-grayText text-sm font-bold mb-1">Tanlangan kitoblar: <span id="totalSelected" class="text-white">0 ta</span></p>
+                <div class="text-xl text-grayText font-bold">Umumiy narx: 
+                    <span id="totalPrice" class="text-3xl font-black text-primary ml-2">0</span> 
+                    <span class="text-sm">so'm</span>
+                </div>
+            </div>
+            <button id="checkoutBtn" class="bg-primary text-white font-bold text-lg px-10 py-4 rounded-xl hover:bg-emerald-600 transition shadow-[0_0_15px_rgba(16,185,129,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 transform hover:-translate-y-1" disabled>
+                Rasmiylashtirish <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="./js/cart.js"></script>
+</body>
+</html>

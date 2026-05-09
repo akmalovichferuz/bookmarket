@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelgan Zakazlar - BookMarket</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkBg font-sans text-lightText min-h-screen">
+
+    <header class="bg-darkCard p-5 flex justify-between items-center shadow-lg border-b border-darkBorder sticky top-0 z-50">
+        <h1 class="text-2xl font-black text-indigo-400"><i class="fa-solid fa-store"></i> Kelgan Zakazlar</h1>
+        <div class="flex gap-4">
+            <a href="/orders.html" class="text-primary font-bold hover:text-emerald-300 transition flex items-center gap-2 mt-2">
+                <i class="fa-solid fa-cart-arrow-down"></i> Xaridlarim
+            </a>
+            <a href="/" class="text-grayText font-bold hover:text-primary transition flex items-center gap-2 mt-2">
+                <i class="fa-solid fa-arrow-left"></i> Asosiy
+            </a>
+        </div>
+    </header>
+
+    <div class="max-w-5xl mx-auto p-6 mt-4">
+        
+        <div class="flex flex-wrap gap-3 mb-8 border-b border-darkBorder pb-4" id="statusTabs">
+            <button data-status="all" class="filter-tab bg-indigo-500 text-white shadow-lg shadow-indigo-500/30 px-5 py-2 rounded-lg font-bold transition">Barcha</button>
+            <button data-status="kutilmoqda" class="filter-tab text-grayText hover:bg-darkCard px-5 py-2 rounded-lg font-bold transition">Kutilmoqda</button>
+            <button data-status="tasdiqlandi" class="filter-tab text-grayText hover:bg-darkCard px-5 py-2 rounded-lg font-bold transition">Tasdiqlangan</button>
+            <button data-status="yetkazib_berildi" class="filter-tab text-grayText hover:bg-darkCard px-5 py-2 rounded-lg font-bold transition">Yetkazilgan</button>
+            <button data-status="rad_etildi" class="filter-tab text-grayText hover:bg-darkCard px-5 py-2 rounded-lg font-bold transition">Rad etilgan</button>
+        </div>
+
+        <div id="zakazContainer" class="space-y-4">
+            <div class="text-center text-indigo-400 py-10"><i class="fa-solid fa-spinner fa-spin text-4xl"></i></div>
+        </div>
+
+    </div>
+
+    <script src="./js/zakazlar.js"></script>
+</body>
+</html>

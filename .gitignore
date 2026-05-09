@@ -1,0 +1,21 @@
+# Qaramliklar (Dependencies)
+node_modules/
+
+# Maxfiy o'zgaruvchilar va parollar (Juda muhim!)
+.env
+.env.*
+
+# Foydalanuvchilar yuklagan fayllar/rasmlar (Gitga tushmasligi kerak)
+public/uploads/
+uploads/
+
+# Log fayllar (Xatoliklar yoziladigan fayllar)
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operatsion tizim fayllari
+.DS_Store
+Thumbs.db

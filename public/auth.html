@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tizimga kirish - BookMarket</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans text-dark min-h-screen flex items-center justify-center p-4">
+
+    <!-- Konteyner -->
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden relative">
+        
+        <!-- Yuqori qism (Logo) -->
+        <div class="bg-primary p-6 text-center text-white">
+            <i class="fa-solid fa-book-open-reader text-4xl mb-2"></i>
+            <h1 class="text-3xl font-bold tracking-tight">BookMarket</h1>
+            <p class="text-indigo-200 mt-2 text-sm">Kitoblar olamiga xush kelibsiz!</p>
+        </div>
+
+        <!-- Tizimga kirish (Login) Qismi -->
+        <div id="loginSection" class="p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Tizimga kirish</h2>
+            <form id="loginForm" class="flex flex-col gap-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Telefon raqam</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 font-medium">+998</span>
+                        <!-- XATOLIK TUZATILDI: Kirish qismiga ham qat'iy himoya qo'yildi -->
+                        <input 
+                            type="tel" 
+                            id="loginPhone" 
+                            placeholder="901234567" 
+                            required 
+                            autocomplete="off"
+                            maxlength="9"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full pl-12 p-3 outline-none transition-colors"
+                        >
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Parol</label>
+                    <input type="password" id="loginPassword" required 
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-3 outline-none transition-colors">
+                </div>
+                <div id="loginError" class="text-red-500 text-sm hidden bg-red-50 p-2 rounded text-center"></div>
+                <button type="submit" id="loginBtnSubmit" class="w-full bg-primary text-white font-bold rounded-lg px-5 py-3 mt-2 shadow hover:bg-indigo-700 transition-colors flex justify-center items-center gap-2">
+                    Kirish
+                </button>
+            </form>
+            <p class="text-center text-sm text-gray-500 mt-6">
+                Hisobingiz yo'qmi? <button id="showRegisterBtn" class="text-primary font-bold hover:underline">Ro'yxatdan o'tish</button>
+            </p>
+        </div>
+
+        <!-- Ro'yxatdan o'tish (Register) Qismi -->
+        <div id="registerSection" class="p-8 hidden">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Ro'yxatdan o'tish</h2>
+            <form id="registerForm" class="flex flex-col gap-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Ism *</label>
+                        <input type="text" id="regFirstName" required 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Familiya *</label>
+                        <input type="text" id="regLastName" required 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 outline-none">
+                    </div>
+                </div>
+
+                <!-- VILOYAT VA TUMAN SELECT QUTILARI -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Viloyat *</label>
+                        <select id="regRegion" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 outline-none cursor-pointer">
+                            <option value="">Tanlang...</option>
+                            <!-- JS dan to'ldiriladi -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Tuman *</label>
+                        <select id="regDistrict" required disabled class="bg-gray-100 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 outline-none cursor-not-allowed">
+                            <option value="">Avval viloyatni tanlang</option>
+                            <!-- JS dan viloyatga mos ravishda to'ldiriladi -->
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Telefon raqam *</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 font-medium">+998</span>
+                        <input 
+                            type="tel" 
+                            id="regPhone" 
+                            placeholder="901234567" 
+                            required 
+                            autocomplete="off"
+                            maxlength="9"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full pl-12 p-2.5 outline-none"
+                        >
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Parol *</label>
+                        <input type="password" id="regPassword" required minlength="6"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Parolni tasdiqlash *</label>
+                        <input type="password" id="regConfirmPassword" required minlength="6"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 outline-none">
+                    </div>
+                </div>
+
+                <div id="registerError" class="text-red-500 text-sm hidden bg-red-50 p-2 rounded text-center mt-1"></div>
+                <button type="submit" id="registerBtnSubmit" class="w-full bg-secondary text-white font-bold rounded-lg px-5 py-3 mt-2 shadow hover:bg-emerald-600 transition-colors flex justify-center items-center gap-2">
+                    Ro'yxatdan o'tish
+                </button>
+            </form>
+            <p class="text-center text-sm text-gray-500 mt-6">
+                Allaqachon hisobingiz bormi? <button id="showLoginBtn" class="text-primary font-bold hover:underline">Kirish</button>
+            </p>
+        </div>
+    </div>
+
+    <script src="./js/auth.js"></script>
+</body>
+</html>

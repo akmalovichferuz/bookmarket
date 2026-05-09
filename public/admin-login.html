@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Kirish - BookMarket</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+</head>
+<body class="bg-darkBg flex items-center justify-center min-h-screen">
+    <div class="bg-darkCard p-10 rounded-[2.5rem] border border-darkBorder w-full max-w-md shadow-2xl">
+        <h1 class="text-3xl font-black text-secondary mb-8 text-center uppercase tracking-widest">Admin Portal</h1>
+        <form id="adminForm" class="flex flex-col gap-6">
+            <input type="text" id="adminLogin" placeholder="Admin Login" class="bg-darkBg border border-darkBorder p-5 rounded-2xl outline-none focus:border-secondary text-lightText" required>
+            <input type="password" id="adminPass" placeholder="Maxfiy Parol" class="bg-darkBg border border-darkBorder p-5 rounded-2xl outline-none focus:border-secondary text-lightText" required>
+            <button type="submit" class="bg-secondary text-white p-5 rounded-2xl font-black hover:bg-opacity-90 transition-all shadow-lg">KIRISH</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('adminForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const loginVal = document.getElementById('adminLogin').value.trim();
+            const passVal = document.getElementById('adminPass').value;
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ login: loginVal, password: passVal })
+                });
+                const data = await res.json();
+                
+                if(data.success) {
+                    localStorage.setItem('adminToken', data.token);
+                    window.location.href = '/admin';
+                } else {
+                    alert(data.message || "Xatolik!");
+                }
+            } catch (err) {
+                alert("Server bilan ulanishda xato!");
+            }
+        });
+    </script>
+</body>
+</html>

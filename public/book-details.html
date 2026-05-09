@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitob ma'lumotlari - BookMarket</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-darkBg font-sans text-lightText min-h-screen flex flex-col">
+    <!-- Navbar (Dark Mode) -->
+    <header class="bg-darkCard shadow-sm border-b border-darkBorder sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <button onclick="window.history.back()" class="flex items-center gap-2 text-grayText hover:text-primary transition-colors">
+                <i class="fa-solid fa-arrow-left text-xl"></i> <span class="font-bold hidden sm:inline">Orqaga</span>
+            </button>
+            <div class="flex items-center gap-2 text-primary cursor-pointer hover:scale-105 transition-transform" onclick="window.location.href='/'">
+                <i class="fa-solid fa-book-open-reader text-2xl"></i>
+                <h1 class="text-xl font-black">BookMarket</h1>
+            </div>
+            <!-- Bo'sh joy balansi uchun -->
+            <div class="w-20"></div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl" id="bookContent">
+        <!-- Yuklanish jarayoni -->
+        <div class="text-center py-32 flex flex-col items-center justify-center">
+            <i class="fa-solid fa-spinner fa-spin text-5xl text-primary drop-shadow-[0_0_10px_rgba(16,185,129,0.5)] mb-4"></i>
+            <p class="text-grayText font-bold text-lg">Ma'lumotlar yuklanmoqda...</p>
+        </div>
+    </main>
+
+    
+    <script src="./js/book-details.js"></script>
+</body>
+</html>

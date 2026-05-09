@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookMarket - Kitob Savdosi Platformasi</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { margin: 0; padding: 0; overflow-x: hidden; }
+        
+        /* 1. Header doim tepada qotadi */
+        #mainHeader { position: fixed; top: 0; left: 0; width: 100%; height: 80px; z-index: 100; }
+        
+        /* 2. Asosiy o'ram Headerdan pastda boshlanadi */
+        #appWrapper { display: flex; width: 100%; min-height: 100vh; padding-top: 80px; box-sizing: border-box; }
+        
+        /* 3. Yon menyu (Sidebar) yashiringan holatda */
+        #sidebar {
+            position: fixed; top: 80px; left: 0; bottom: 0; width: 280px;
+            z-index: 90; transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        /* 4. Asosiy kontent (Yon menyuga qarab suriladi) */
+        #mainContent {
+            flex-grow: 1; width: 100%; margin-left: 0;
+            transition: margin-left 0.3s ease-in-out; box-sizing: border-box;
+        }
+
+        /* 5. Qora fon (Mobil uchun) */
+        #sidebarOverlay {
+            position: fixed; top: 80px; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7); z-index: 85;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* ===== JS QO'SHADIGAN KLASSLAR (KAFOLATLANGAN) ===== */
+        
+        /* KATTA EKRANDA OCHILGANDA */
+        body.sidebar-desktop-open #sidebar { transform: translateX(0); }
+        body.sidebar-desktop-open #mainContent { margin-left: 280px; } /* Itarish mana shu yerda bo'ladi! */
+        
+        /* KICHIK EKRANDA OCHILGANDA */
+        body.sidebar-mobile-open #sidebar { transform: translateX(0); }
+        body.sidebar-mobile-open #sidebarOverlay { opacity: 1; visibility: visible; }
+        /* Kichik ekranda margin-left qo'shilmaydi, ustidan chiqadi */
+    </style>
+</head>
+<body class="bg-darkBg font-sans text-lightText" style="display: none;" id="mainBody">
+
+    <header id="mainHeader" class="bg-darkCard p-4 flex justify-between items-center shadow-lg border-b border-darkBorder">
+        <div class="flex items-center gap-4">
+            <button id="menuBtn" class="text-2xl text-primary hover:text-emerald-400 transition outline-none p-2 rounded-lg hover:bg-darkBg">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <h1 class="text-2xl font-black text-primary hidden sm:flex items-center gap-2">
+                <i class="fa-solid fa-book-open-reader"></i> BookMarket
+            </h1>
+        </div>
+        
+        <div class="flex items-center gap-4 w-full max-w-2xl mx-auto group">
+    
+            <!-- Lupacha - maydon tashqarisida -->
+            <div class="shrink-0">
+                <i class="fa-solid fa-magnifying-glass text-2xl text-primary/80 group-focus-within:text-primary group-focus-within:scale-110 transition-all duration-300"></i>
+            </div>
+        
+            <!-- Qidiruv maydoni -->
+            <div class="relative flex-1">
+                <input 
+                    type="text" 
+                    id="globalSearchInput" 
+                    class="w-full bg-darkCard border-2 border-darkBorder rounded-2xl py-3 px-6 text-base text-lightText outline-none focus:border-primary focus:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all duration-300 placeholder:text-grayText/50" 
+                    placeholder="Kitob nomi yoki muallifni qidiring..."
+                >
+            </div>
+        </div>
+        
+        <button onclick="window.location.href='/create-book.html'" class="bg-primary hover:bg-emerald-500 text-white font-bold py-2.5 px-5 rounded-full transition shadow-lg shadow-primary/20 flex items-center gap-2 shrink-0">
+            <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">E'lon berish</span>
+        </button>
+    </header>
+
+    <div id="appWrapper">
+        
+        <div id="sidebarOverlay"></div>
+
+        <aside id="sidebar" class="bg-darkCard border-r border-darkBorder flex flex-col shadow-2xl overflow-y-auto">
+            <div class="p-6 border-b border-darkBorder bg-darkBg relative shrink-0">
+                <button id="closeSidebarBtn" class="absolute top-4 right-4 text-grayText hover:text-red-500 text-2xl transition lg:hidden"><i class="fa-solid fa-xmark"></i></button>
+                <div class="flex items-center gap-4 mt-2 pr-6">
+                    <div class="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-white font-black text-xl shadow-lg shrink-0" id="sidebarUserInitial">U</div>
+                    <div class="overflow-hidden">
+                        <p class="font-bold text-lg text-white truncate" id="sidebarUserName">Foydalanuvchi</p>
+                        <p class="text-xs text-primary font-bold">BookMarket a'zosi</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="flex-grow flex flex-col gap-2 p-4">
+                <a href="/" class="flex items-center gap-4 p-3.5 rounded-xl text-primary font-bold transition group bg-darkBg border border-darkBorder/50">
+                    <i class="fa-solid fa-house w-6 text-center text-primary transition"></i> Asosiy sahifa
+                </a>
+                <a href="/profile.html" class="flex items-center gap-4 p-3.5 rounded-xl hover:bg-darkBg text-lightText font-bold transition group">
+                    <i class="fa-solid fa-user w-6 text-center text-grayText group-hover:text-blue-400 transition"></i> Mening Profilim
+                </a>
+
+                <!-- YANGLIK: YOQTIRISHLAR VA POCHTAM SHU YERGA QO'SHILDI -->
+                <a href="/likes.html" class="flex items-center gap-4 p-3.5 rounded-xl hover:bg-darkBg text-lightText font-bold transition group">
+                    <i class="fa-solid fa-heart w-6 text-center text-grayText group-hover:text-red-500 transition"></i> Yoqtirishlar
+                </a>
+                <a href="/mail.html" class="flex items-center gap-4 p-3.5 rounded-xl hover:bg-darkBg text-lightText font-bold transition group">
+                    <i class="fa-solid fa-envelope w-6 text-center text-grayText group-hover:text-indigo-400 transition"></i> Pochtam
+                </a>
+                
+                <div class="h-px bg-darkBorder/50 my-2 mx-2"></div>
+                
+                <a href="/cart.html" class="flex items-center gap-4 p-3.5 rounded-xl hover:bg-darkBg text-lightText font-bold transition group relative">
+                    <i class="fa-solid fa-cart-shopping w-6 text-center text-grayText group-hover:text-emerald-400 transition"></i> Savatcha
+                    <span id="sidebarCartBadge" class="absolute right-4 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full hidden">0</span>
+                </a>
+                <a href="/orders.html" class="flex items-center gap-4 p-3.5 rounded-xl hover:bg-darkBg text-lightText font-bold transition group">
+                    <i class="fa-solid fa-cart-arrow-down w-6 text-center text-grayText group-hover:text-yellow-400 transition"></i> Mening Xaridlarim
+                </a>
+                
+                <div class="h-px bg-darkBorder/50 my-2 mx-2"></div>
+
+                <a href="/zakazlar.html" class="flex items-center gap-4 p-3.5 rounded-xl hover:bg-darkBg text-lightText font-bold transition group border border-indigo-500/20 bg-indigo-500/5 hover:bg-indigo-500 hover:text-white">
+                    <i class="fa-solid fa-store w-6 text-center text-indigo-400 group-hover:text-white transition"></i> Kelgan Zakazlar
+                </a>
+            </nav>
+
+            <div class="p-5 border-t border-darkBorder bg-darkBg/30 shrink-0">
+                <button id="sidebarLogoutBtn" class="w-full flex items-center justify-center gap-3 p-3.5 rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition font-bold border border-red-500/20">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Tizimdan chiqish
+                </button>
+            </div>
+        </aside>
+
+        <main id="mainContent">
+            <div class="p-4 sm:p-8 max-w-7xl mx-auto w-full">
+                
+                <section class="bg-darkCard rounded-3xl shadow-xl border border-darkBorder p-6 sm:p-8 mb-12 relative z-10">
+                    <h2 class="text-xl font-black mb-6 text-lightText flex items-center gap-2 border-b border-darkBorder pb-4">
+                        <i class="fa-solid fa-filter text-primary"></i> Kengaytirilgan Qidiruv
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 items-end">
+                        <div class="flex flex-col relative">
+                            <label for="genreSelect" class="text-xs font-bold text-grayText mb-2 uppercase tracking-wider">Janr</label>
+                            <select id="genreSelect" class="bg-darkBg border border-darkBorder text-lightText text-sm rounded-xl focus:ring-primary focus:border-primary block w-full p-3.5 outline-none transition-colors shadow-inner cursor-pointer appearance-none">
+                                <option value="">Barcha janrlar</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 bottom-4 text-grayText pointer-events-none text-sm"></i>
+                        </div>
+
+                        <div class="flex flex-col relative">
+                            <label for="authorInput" class="text-xs font-bold text-grayText mb-2 uppercase tracking-wider">Yozuvchi</label>
+                            <input type="text" id="authorInput" placeholder="Masalan: Pirimqul..." autocomplete="off" class="bg-darkBg border border-darkBorder text-lightText text-sm rounded-xl focus:ring-primary focus:border-primary block w-full p-3.5 outline-none transition-colors shadow-inner">
+                            <div id="authorSuggestions" class="absolute top-full left-0 right-0 hidden mt-2 z-50"></div>
+                        </div>
+
+                        <div class="flex flex-col relative">
+                            <label for="titleInput" class="text-xs font-bold text-grayText mb-2 uppercase tracking-wider">Kitob nomi</label>
+                            <input type="text" id="titleInput" placeholder="Masalan: Yulduzli tunlar..." autocomplete="off" class="bg-darkBg border border-darkBorder text-lightText text-sm rounded-xl focus:ring-primary focus:border-primary block w-full p-3.5 outline-none transition-colors shadow-inner">
+                            <div id="titleSuggestions" class="absolute top-full left-0 right-0 hidden mt-2 z-50"></div>
+                        </div>
+
+                        <div class="relative">
+                            <button id="filterSearchBtn" class="w-full bg-primary text-darkBg font-black rounded-xl px-5 py-3.5 text-center shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:bg-primaryHover hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all flex justify-center items-center gap-2 transform hover:-translate-y-1">
+                                <i class="fa-solid fa-search"></i> Qidirish
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="relative z-0">
+                    <div class="flex flex-wrap justify-between items-end mb-8 border-b border-darkBorder pb-4 gap-4">
+                        <h2 class="text-2xl sm:text-3xl font-black text-lightText">So'nggi e'lonlar</h2>
+                        <span class="text-sm font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-lg border border-primary/20 shadow-inner" id="resultsCount">
+                            Yuklanmoqda...
+                        </span>
+                    </div>
+                    
+                    <div id="booksContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>
