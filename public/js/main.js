@@ -6,7 +6,7 @@ if (!token) {
     document.getElementById('mainBody').style.display = 'block';
 }
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = '/api';
 let userLikedBooks = []; 
 let allMyChats = [];
 window.activeChatState = { bookId: null, receiverId: null, mode: null }; 
